@@ -71,7 +71,7 @@ export class HomePageComponent implements OnInit {
         this.orderService.orderProduct(order).subscribe(() => {
           this.orderSuccess = true;
         }, error => {
-          this.orderFailed = false;
+          this.orderFailed = true;
         })
       }
     })
