@@ -5,7 +5,14 @@
   "projects": {
     "OnlineStoreFrontend": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "type": "component"
+        },
+        "@schematics/angular:service": {
+          "type": "service"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -88,5 +95,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "3281a7e9-7415-43ae-96a1-87775b5c33c9"
   }
 }
