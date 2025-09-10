@@ -20,13 +20,12 @@ export class HeaderComponent implements OnInit {
       }
     )
     this.oidcSecurityService.userData$.subscribe(result => {
-      // result može da izgleda ovako: { userData: {...} } ili null
       if (result?.userData) {
         this.username = result.userData.preferred_username ?? '';
         console.log('[Header] User data available:', result.userData);
       } else {
         this.username = '';
-        console.log('[Header] Nema userData - korisnik nije autentifikovan');
+        console.log('[Header] No userData - user is not authenticated');
       }
     });
   }
