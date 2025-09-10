@@ -38,7 +38,7 @@ export class AddProductComponent {
         this.addProductForm.reset();
       })
     } else {
-      console.log('Form is not valid');
+      this.addProductForm.markAllAsTouched();
     }
   }
 
