@@ -22,3 +22,18 @@
   font-size: 16px;
   text-align: center;
 }
+
+.snack-no-ripple .mat-mdc-snack-bar-action .mat-mdc-button-base {
+  background: transparent !important;
+  box-shadow: none !important;
+  min-width: auto !important;
+}
+.snack-no-ripple .mat-mdc-button .mdc-button__ripple,
+.snack-no-ripple .mat-mdc-button .mat-mdc-focus-indicator,
+.snack-no-ripple .mat-mdc-button::before,
+.snack-no-ripple .mat-mdc-button::after {
+  display: none !important;
+}
+.snack-no-ripple .mat-mdc-snack-bar-action {
+  color: #fff !important;
+}

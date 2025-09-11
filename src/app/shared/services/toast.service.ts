@@ -10,7 +10,7 @@ export class ToastService {
       duration,
       horizontalPosition: 'center',
       verticalPosition: 'top',
-      panelClass: [panelClass],
+      panelClass: [panelClass, 'snack-no-ripple'],
     };
 
     this.snack.open(message, '×', config);
