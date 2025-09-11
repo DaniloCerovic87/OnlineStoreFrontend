@@ -47,17 +47,20 @@ export class HomePageComponent implements OnInit {
   orderProduct(product: Product, quantity: string) {
 
     this.oidcSecurityService.userData$.subscribe(result => {
+      const claims = result.userData as { [key: string]: any };
+
       const userDetails = {
-        email: result.userData.email,
-        firstName: result.userData.firstName,
-        lastName: result.userData.lastName
-      };
+        email: claims['email'],
+        firstName: claims['given_name'],
+        lastName: claims['family_name'],
+      }
 
       if(!quantity) {
         this.orderFailed = true;
         this.orderSuccess = false;
         this.quantityIsNull = true;
       } else {
+        console.log("product: " , product);
         const order: Order = {
           skuCode: product.skuCode,
           price: product.price,
@@ -66,8 +69,10 @@ export class HomePageComponent implements OnInit {
         }
 
         this.orderService.orderProduct(order).subscribe(() => {
+          console.log("order success");
           this.orderSuccess = true;
         }, error => {
+          console.log("order error ", error);
           this.orderFailed = false;
         })
       }
