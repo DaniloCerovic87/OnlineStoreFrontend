@@ -10,32 +10,39 @@
       }
     </div>
     @if (products.length > 0) {
-      @if (orderSuccess) {
-        <h4 class="text-green-500 font-bold">Order Placed Successfully</h4>
-      } @else if (orderFailed) {
-        <h4 class="text-red-500 font-bold">Order Failed, please try again later</h4>
-        @if(quantityIsNull) {
-          <h4 class="text-red-500 font-bold">Quantity cannot be null</h4>
-        }
-      }
       <ul class="list-disc list-inside">
         @for (product of products; track product.id) {
-          <li class="mb-2 p-4 bg-gray-100 rounded-lg shadow-sm flex justify-between items-center">
-            <div>
-              <span class="font-semibold">{{ product.name }}</span> -
-              <span class="text-gray-600">
-                Price: {{ product.price }}
-              </span>
-              <br/>
-              <span >
-                Quantity: <input type="number" #quantityInput/>
-              </span>
-              <br/>
-            </div>
-            <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 ml-4"
-                    (click)="orderProduct(product, quantityInput.value)">
-              Order Now
-            </button>
+          <li class="mb-2 p-4 bg-gray-100 rounded-lg shadow-sm list-none">
+            <form #itemForm="ngForm"
+                  (ngSubmit)="orderProduct(product, qty, itemForm)"
+                  class="flex items-center gap-4">
+
+              <div class="flex-1">
+                <div class="font-semibold">{{ product.name }}</div>
+                <div class="text-gray-600">Price: {{ product.price }}</div>
+
+                <label class="mt-1 block">
+                  Quantity:
+                  <input type="number"
+                         class="border rounded px-2 py-1 ml-2 w-24"
+                         name="quantity-{{ product.id }}"
+                         ngModel
+                         #qty="ngModel"
+                          required
+                  min="1" />
+                </label>
+                @if(itemForm.submitted && qty.invalid) {
+                   <div class="text-red-500 text-sm">
+                      Quantity must be at least 1
+                   </div>
+                }
+              </div>
+
+              <button type="submit"
+                      class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
+                Order Now
+              </button>
+            </form>
           </li>
         }
       </ul>
