@@ -74,12 +74,12 @@ export class HomePageComponent implements OnInit {
       this.orderService.orderProduct(order).subscribe({
         next: (res) => {
           this.toastService.success(
-            `You order is placed successfully. Order number: #${res.orderNumber})`
+            `You order is placed successfully. Order number: #${res.orderNumber})`, 10000
           );
           form.resetForm();
         },
         error: (err) => {
-          this.toastService.error(err?.error?.message ?? 'Failed to place order');
+          this.toastService.error(err?.error?.message ?? 'Failed to place order', 10000);
         }
       });
     });

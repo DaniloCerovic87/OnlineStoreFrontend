@@ -5,7 +5,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 export class ToastService {
   constructor(private snack: MatSnackBar) {}
 
-  private show(message: string, panelClass: string, duration = 3000) {
+  private show(message: string, panelClass: string, duration: number) {
     const config: MatSnackBarConfig = {
       duration,
       horizontalPosition: 'center',
@@ -16,15 +16,15 @@ export class ToastService {
     this.snack.open(message, '×', config);
   }
 
-  success(message: string) {
-    this.show(message, 'snack-success');
+  success(message: string, duration: number) {
+    this.show(message, 'snack-success', duration);
   }
 
-  error(message: string) {
-    this.show(message, 'snack-error', 5000); // error traje duže
+  error(message: string, duration: number) {
+    this.show(message, 'snack-error', duration);
   }
 
-  info(message: string) {
-    this.show(message, 'snack-info');
+  info(message: string, duration: number) {
+    this.show(message, 'snack-info', duration);
   }
 }
