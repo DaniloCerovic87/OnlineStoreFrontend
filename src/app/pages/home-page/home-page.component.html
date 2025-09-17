@@ -28,10 +28,11 @@
                          name="quantity-{{ product.id }}"
                          ngModel
                          #qty="ngModel"
-                          required
-                  min="1" />
+                         required
+                         min="1"
+                         (blur)="clearInlineErrors()"/>
                 </label>
-                @if(itemForm.submitted && qty.invalid) {
+                @if(itemForm.submitted && qty.invalid && showSubmitError) {
                    <div class="text-red-500 text-sm">
                       Quantity must be at least 1
                    </div>

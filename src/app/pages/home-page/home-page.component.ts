@@ -25,6 +25,8 @@ export class HomePageComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly toastService = inject(ToastService);
   isAuthenticated = false;
+  showSubmitError = false;
+
   products: Array<Product> = [];
 
   ngOnInit(): void {
@@ -46,14 +48,11 @@ export class HomePageComponent implements OnInit {
 
   orderProduct(product: Product, qty: NgModel, form: NgForm) {
     if (form.invalid) {
+      this.showSubmitError = true;
       return;
     }
 
     const quantity = Number(qty.value);
-
-    if (!quantity || quantity < 1) {
-      return;
-    }
 
     this.oidcSecurityService.userData$.subscribe(result => {
       const claims = result.userData as { [key: string]: any };
@@ -83,5 +82,9 @@ export class HomePageComponent implements OnInit {
         }
       });
     });
+  }
+
+  clearInlineErrors() {
+    this.showSubmitError = false;
   }
 }
