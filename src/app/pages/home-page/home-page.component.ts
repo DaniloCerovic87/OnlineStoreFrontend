@@ -8,6 +8,7 @@ import {FormsModule, NgForm, NgModel} from "@angular/forms";
 import {OrderService} from "../../services/order/order.service";
 import {ToastService} from '../../shared/services/toast.service';
 import {CommonModule} from '@angular/common';
+import {extractApiMsg} from '../../shared/error/util/http-error-util';
 
 @Component({
   selector: 'app-homepage',
@@ -78,7 +79,9 @@ export class HomePageComponent implements OnInit {
           form.resetForm();
         },
         error: (err) => {
-          this.toastService.error(err?.error?.message ?? 'Failed to place order', 10000);
+          const msg = extractApiMsg(err, 'Failed to place order');
+          this.toastService.clear?.();
+          this.toastService.error(msg, 10000);
         }
       });
     });

@@ -15,6 +15,9 @@ export class ToastService {
 
     this.snack.open(message, '×', config);
   }
+  clear() {
+    this.snack.dismiss();
+  }
 
   success(message: string, duration: number) {
     this.show(message, 'snack-success', duration);
