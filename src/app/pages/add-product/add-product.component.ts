@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {Product} from "../../model/product";
 import {ProductService} from "../../services/product/product.service";
 import {NgIf} from "@angular/common";
+import {ToastService} from '../../shared/services/toast.service';
 
 @Component({
   selector: 'app-add-product',
@@ -14,7 +15,7 @@ import {NgIf} from "@angular/common";
 export class AddProductComponent {
   addProductForm: FormGroup;
   private readonly productService = inject(ProductService);
-  productCreated = false;
+  private readonly toastService = inject(ToastService);
 
   constructor(private fb: FormBuilder) {
     this.addProductForm = this.fb.group({
@@ -34,7 +35,7 @@ export class AddProductComponent {
         price: this.addProductForm.get('price')?.value
       }
       this.productService.createProduct(product).subscribe(product => {
-        this.productCreated = true;
+        this.toastService.success('Product Created Successfully', 3000);
         this.addProductForm.reset();
       })
     } else {
