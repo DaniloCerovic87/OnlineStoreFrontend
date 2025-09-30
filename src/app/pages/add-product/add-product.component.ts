@@ -2,13 +2,12 @@ import {Component, inject} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Product} from "../../model/product";
 import {ProductService} from "../../services/product/product.service";
-import {NgIf} from "@angular/common";
 import {ToastService} from '../../shared/services/toast.service';
 
 @Component({
   selector: 'app-add-product',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
+  imports: [ReactiveFormsModule],
   templateUrl: './add-product.component.html',
   styleUrl: './add-product.component.css'
 })
@@ -19,10 +18,10 @@ export class AddProductComponent {
 
   constructor(private fb: FormBuilder) {
     this.addProductForm = this.fb.group({
-      skuCode: ['', [Validators.required]],
-      name: ['', [Validators.required]],
-      description: ['', [Validators.required]],
-      price: [0, [Validators.required]]
+      skuCode: ['', [Validators.required, Validators.minLength(3)]],
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      description: ['', [Validators.required, Validators.minLength(10)]],
+      price: [0, [Validators.required, Validators.min(1)]]
     })
   }
 
