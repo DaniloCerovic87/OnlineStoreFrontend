@@ -18,4 +18,9 @@ export class ProductService {
   createProduct(product: Product): Observable<Product> {
     return this.httpClient.post<Product>('http://localhost:9000/api/product', product);
   }
+
+  deleteProduct(id: string): Observable<void> {
+    return this.httpClient.delete<void>(`http://localhost:9000/api/product/${encodeURIComponent(id)}`);
+  }
+
 }

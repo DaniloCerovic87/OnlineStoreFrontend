@@ -32,16 +32,22 @@
                          min="1"
                          (blur)="clearInlineErrors()"/>
                 </label>
-                @if(itemForm.submitted && qty.invalid && showSubmitError) {
-                   <div class="text-red-500 text-sm">
-                      Quantity must be at least 1
-                   </div>
+                @if (itemForm.submitted && qty.invalid && showSubmitError) {
+                  <div class="text-red-500 text-sm">
+                    Quantity must be at least 1
+                  </div>
                 }
               </div>
 
               <button type="submit"
                       class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
                 Order Now
+              </button>
+              <button type="button"
+                      class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+                      (click)="deleteProduct(product.id)"
+              >
+                Delete
               </button>
             </form>
           </li>

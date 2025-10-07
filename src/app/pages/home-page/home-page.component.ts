@@ -87,6 +87,23 @@ export class HomePageComponent implements OnInit {
     });
   }
 
+  deleteProduct(id: string | undefined) {
+    if (!id) {
+      this.toastService.error('Invalid product id', 5000);
+      return;
+    }
+
+    this.productService.deleteProduct(id).subscribe({
+      next: () => {
+        this.toastService.success('Product deleted successfully', 5000);
+        this.products = this.products.filter(p => p.id !== id);
+      },
+      error: (err) => {
+        this.toastService.error(extractApiMsg(err), 5000);
+      }
+    });
+  }
+
   clearInlineErrors() {
     this.showSubmitError = false;
   }
